@@ -32,6 +32,7 @@
           ></ion-img></div></ion-col>
                 <ion-col size="10">
                     <div><span style="color:grey">{{student.firstName}} {{student.lastName}} </span></div>
+                    <div v-if="student.isAbsent != 'Y'">
                     <ion-row style="align-content: flex-start;"                     
                      v-for="time in student.clockHistory" :key="time.studentID"
                     >
@@ -42,6 +43,7 @@
                                 <div style="color:grey">{{this.changeTimeTo12(time.studentClockOutDateTime)}}</div>
                             </ion-col>
                     </ion-row>
+                    </div>
                     <ion-row style="align-content: flex-start;" v-if="student.clockHistory.length == 0 || student.isAbsent == 'Y'">
                         <ion-col size="12"><span style="color:red;">Absent</span></ion-col>
                     </ion-row>
@@ -64,6 +66,7 @@
           ></ion-img></div></ion-col>
                 <ion-col size="8" @click="router.push(`/editTimes/${classIDLong}/${student.studentId}`)">
                     <div><span style="font-weight:bold;" >{{student.firstName}} {{student.lastName}} </span></div>
+                    <div v-if="student.isAbsent != 'Y'">
                     <ion-row style="align-content: flex-start;"                     
                      v-for="time in student.clockHistory" :key="time.studentID"
                     >
@@ -74,6 +77,7 @@
                                 <div>{{this.changeTimeTo12(time.studentClockOutDateTime)}}</div>
                             </ion-col>                        
                     </ion-row>
+                    </div>
                     <ion-row style="align-content: flex-start;" v-if="student.clockHistory.length == 0 || student.isAbsent == 'Y'"
                     @click="router.push(`/editTimes/${classIDLong}/${student.studentId}`)"
                     >
@@ -467,7 +471,9 @@ export default {
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
             
-            var clockId = this.studentList.find((s)=>s.studentId == id).clockHistory[0].clockId;
+            //var listClockhistory = [];
+            var clockId = this.studentList.find((s)=>s.studentId == id).clockHistory.find((s)=>s.isAbsent == "Y").clockId;
+            //var clockId = listClockhistory.find((s)=>s.isAbsent == "Y").clockId;
 
             fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
