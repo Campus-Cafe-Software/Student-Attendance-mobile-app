@@ -48,7 +48,9 @@
                     v-bind:value="times.instructorClockOutDateTime"
                     @IonChange="times.instructorClockOutDateTime=$event.target.value;times.modify=2;anythingChanged=true;"
                     ></ion-datetime></ion-col>
-                <ion-col size="3" style="text-align: center;"><ion-button v-if="times.canDel == true"  @click="removeSelectedTime(index)" style="height:26px;--background:#517FC8;">
+                <ion-col size="3" style="text-align: center;">
+                    <!--<ion-button v-if="times.canDel == true"  @click="removeSelectedTime(index)" style="height:26px;--background:#517FC8;">-->
+                    <ion-button  @click="removeSelectedTime(index)" style="height:26px;--background:#517FC8;">    
                     <ion-icon  slot="icon-only" :icon="closeCircleOutline"></ion-icon></ion-button></ion-col>
             </ion-row>
             <!--<hr style="border-width: 1px; margin: 0 20px;"/>-->
@@ -346,6 +348,7 @@ export default {
             console.log("-new student = "+JSON.stringify(this.student)); 
             console.log("-old student = "+JSON.stringify(this.studentOrig)); 
             this.errorCount = 0;
+            var totalDeleteCount = 0;
             this.paddingstudentOrig();
 
             for(var i = 0; i < this.student.clockHistory.length; i++){
@@ -359,13 +362,24 @@ export default {
                             this.actionCount++;
                             this.submitUpdateTime(i);
                             break;
-                    case 3: console.log(i+" instructorClock is deleted");
-                            this.actionCount++;
-                            this.submitDelTime(i);
+                    case 3: console.log(i+" instructorClock is deleted");                            
+                            if(this.student.clockHistory[i].canDel == true)
+                                {
+                                    this.actionCount++;
+                                    this.submitDelTime(i);
+                                }
+                            totalDeleteCount++;
                             break;
                 }  
             }
             
+            // if all the actions are delete, no time left in clockHistory
+            // mark student absent
+            if(this.student.clockHistory.length == totalDeleteCount) {
+                this.submitAddAbsent();
+                this.actionCount++;
+            }
+
             /*
             for(var i = 0; i < this.student.clockHistory.length; i++){
                 // instructorClock DateTime changed
@@ -618,6 +632,7 @@ export default {
                 //console.log("ins classes = " + JSON.stringify(data.classes));
                     console.log("mark absent Y");
                     this.errorAbsent = false;
+                    this.openToastSuccessful();
                 })
                 .catch(error => {
                     this.errorMessage = error;
