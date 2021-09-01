@@ -1,7 +1,7 @@
 {
-  "name": "vue-first-app",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue"
+    "name": "vue-first-app",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "vue"
 }

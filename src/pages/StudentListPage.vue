@@ -1,7 +1,7 @@
 <template>
     <base-layout 
         page-title="Faculty Acceptance"
-        page-default-back-link="classList"
+        page-default-back-link="/cafeweb/mobile/classList"
     >
         <ion-grid>
       <ion-row>
@@ -64,7 +64,7 @@
                 <ion-col size="2"><div><ion-img
             src="../../assets/default-avatar.png"            
           ></ion-img></div></ion-col>
-                <ion-col size="8" @click="router.push(`/editTimes/${classIDLong}/${student.studentId}`)">
+                <ion-col size="8" @click="router.push(`/cafeweb/mobile/editTimes/${classIDLong}/${student.studentId}`)">
                     <div><span style="font-weight:bold;" >{{student.firstName}} {{student.lastName}} </span></div>
                     <div v-if="student.isAbsent != 'Y'">
                     <ion-row style="align-content: flex-start;"                     
@@ -79,7 +79,7 @@
                     </ion-row>
                     </div>
                     <ion-row style="align-content: flex-start;" v-if="student.clockHistory.length == 0 || student.isAbsent == 'Y'"
-                    @click="router.push(`/editTimes/${classIDLong}/${student.studentId}`)"
+                    @click="router.push(`/cafeweb/mobile/editTimes/${classIDLong}/${student.studentId}`)"
                     >
                         <ion-col size="12"><span style="color:red;">Absent</span></ion-col>
                     </ion-row>
@@ -223,7 +223,7 @@ export default {
                          }
             };
 
-            var url = "https://qa2-web.scansoftware.com/cafeweb/api/instructor/classClockTimes?"+ 
+            var url = "/cafeweb/api/instructor/classClockTimes?"+ 
                         "date=" + this.getTodayDay() +
                         "&semester=" + this.cuInsClass.semester +                
                         "&courseNumber=" + this.cuInsClass.courseNumber + 
@@ -254,7 +254,7 @@ export default {
                 })
                 .catch(error => {
                 this.errorMessage = error;
-                console.error('There was an error!', error);
+                console.log('There was an error! '+error.toString());
                 this.openToastFailed();
                 this.stillLoading = false;
                 }); 
@@ -269,7 +269,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/confirmClassClockTimes?'+            
+            fetch('/cafeweb/api/instructor/confirmClassClockTimes?'+            
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -291,7 +291,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.openToastFailed();
                 });
             
@@ -427,7 +427,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/api/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -453,7 +453,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.errorAbsent = true;
                 });
@@ -475,7 +475,7 @@ export default {
             var clockId = this.studentList.find((s)=>s.studentId == id).clockHistory.find((s)=>s.isAbsent == "Y").clockId;
             //var clockId = listClockhistory.find((s)=>s.isAbsent == "Y").clockId;
 
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/api/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -502,7 +502,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.errorAbsent = true;
                 });

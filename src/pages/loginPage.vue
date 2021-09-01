@@ -1,5 +1,5 @@
 <template>
-<base-layout page-title="" page-default-back-link="/">
+<base-layout page-title="" page-default-back-link="/cafeweb/mobile/">
   <ion-grid>
     <ion-row>
       <ion-col size="12" style="text-align: center">
@@ -8,7 +8,7 @@
         </h1>
         
           <ion-img
-            src="../../assets/campus.cafe.logo.png"
+            src="/cafeweb/mobile/assets/campus.cafe.logo.png"
             style="padding: 40px 80px"
           ></ion-img>
         <!--
@@ -70,7 +70,7 @@ export default {
       lockOpenOutline,
       timeOutline,
       alarmOutline,
-      img: "../../assets/campus.cafe.logo.png",
+      img: "/cafeweb/mobile/assets/campus.cafe.logo.png",
       schools:[],
       school:'',
       loginError: false,
@@ -115,7 +115,7 @@ export default {
         //body: JSON.stringify({"username":"student3","password":"student3"})
 
       };
-      fetch('https://qa2-web.scansoftware.com/cafeweb/api/authenticate/token', requestOptions)
+      fetch('/cafeweb/api/authenticate/token', requestOptions)
         .then(async response => {
           const data = await response.json();
 
@@ -131,13 +131,13 @@ export default {
           console.log("saved to state "+this.$store.getters.getToken);
           //console.log('school = ' + this.$store.getters.getSchool);
           this.createStorage();
-          this.$router.push('/classList');
+          this.$router.push('/cafeweb/mobile/classList');
           //this.postId = data.id;
           //this.getClasses();
         })
         .catch(error => {
           this.errorMessage = error;
-          console.error('There was an error!', error);
+          console.log('There was an error! '+error.toString());
           this.loginError = true;
         });
     },
@@ -167,7 +167,7 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error;
-          console.error('There was an error!', error);
+          console.log('There was an error! '+error.toString());
         });
     },
 */

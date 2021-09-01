@@ -1,13 +1,13 @@
 <template>
     <base-layout 
         page-title="Edit Times"
-        page-default-back-link="studentList"
+        page-default-back-link="/cafeweb/mobile/studentList"
     >
         <ion-grid>
       <ion-row>
         <ion-col size="12" style="text-align: center">
           <!--<h4>Faculty Acceptance</h4>-->
-          <div><ion-img src="../../assets/default-avatar.png" style="width:100px;margin: auto;margin-bottom:10px;"></ion-img></div>
+          <div><ion-img src="/cafeweb/mobile/assets/default-avatar.png" style="width:100px;margin: auto;margin-bottom:10px;"></ion-img></div>
           <h2 style="margin:0px;font-weight:bold;">{{student.firstName}} {{student.lastName}}</h2>
         </ion-col>
       </ion-row>
@@ -478,7 +478,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentClockTime?'+
+            fetch('/cafeweb/api/instructor/studentClockTime?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -505,7 +505,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.openToastFailed();
                 });
@@ -521,7 +521,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentClockTime?'+
+            fetch('/cafeweb/api/instructor/studentClockTime?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -549,7 +549,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.openToastFailed();
                 });
@@ -567,7 +567,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentClockTime?'+
+            fetch('/cafeweb/api/instructor/studentClockTime?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -593,7 +593,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.openToastFailed();
                 });
@@ -610,7 +610,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/api/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -636,7 +636,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.errorAbsent = true;
                 });
@@ -653,7 +653,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/api/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -679,7 +679,7 @@ export default {
                 })
                 .catch(error => {
                     this.errorMessage = error;
-                    console.error('There was an error!', error);
+                    console.log('There was an error! '+error.toString());
                     this.errorCount++;
                     this.errorAbsent = true;
                 });

@@ -1,0 +1,7 @@
+{
+    "name": "student-attendance",
+    "short_name": "Attendance",
+    "start_url": "/cafeweb/mobile/",
+    "display": "standalone"
+
+}

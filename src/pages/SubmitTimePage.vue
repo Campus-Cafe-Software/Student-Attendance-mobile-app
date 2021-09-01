@@ -1,5 +1,5 @@
 <template>
-  <base-layout page-title="Student Attendance" page-default-back-link="classList">
+  <base-layout page-title="Student Attendance" page-default-back-link="/cafeweb/mobile/classList">
     <ion-grid>
       <ion-row>
         <ion-col size="12" style="text-align: center">
@@ -225,7 +225,7 @@ export default {
                   }
       };
 
-      var url = "https://qa2-web.scansoftware.com/cafeweb/api/student/"+ 
+      var url = "/cafeweb/api/student/"+ 
                 this.submitClockId +
                 "semester=" + this.$store.getters.cuClass(this.$route.params.id).semester +                
                 "&courseNumber=" + this.$route.params.id + 
@@ -243,7 +243,7 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error;
-          console.error('There was an error!', error);
+          console.log('There was an error! '+error.toString());
           this.openToastFailed();
         });
     },

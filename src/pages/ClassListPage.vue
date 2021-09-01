@@ -1,5 +1,5 @@
 <template>
-  <base-layout page-title="Class Schedule" page-default-back-link="login">
+  <base-layout page-title="Class Schedule" page-default-back-link="/cafeweb/mobile/login">
 
 
 
@@ -71,7 +71,7 @@
     <!-- activeForClockInOut != Y, disable class -->
     <ion-row style="background:#727272;margin:15px 10px;"   v-if="cuClass.activeForClockInOut!='Y' && cuClass.courseNumber != undefined "   
       class="course-block"
-      @click="router.push(`/submitTime/${cuClass.courseNumber}`)"
+      @click="router.push(`/cafeweb/mobile/submitTime/${cuClass.courseNumber}`)"
     >
           
           <ion-col size="6" style="float: left;font-size:12px;">
@@ -99,9 +99,11 @@
     -->
     <!-- activeForClockInOut == Y , enable class -->
     <ion-row style="background:#517FC8;margin:15px 10px;"  v-if="cuClass.activeForClockInOut=='Y' && cuClass.courseNumber != undefined " 
-      class="course-block"
-      @click="router.push(`/submitTime/${cuClass.courseNumber}`)"
+      class="course-block"      
+      
+      @click="router.push(`/cafeweb/mobile/submitTime/${cuClass.courseNumber}`)"
     >
+    <!-- @click="router.oush({name: 'submitTime', params: { id: cuClass.courseNumber }})" -->
 
             <ion-col size="6" style="float: left;font-size:12px;">
               {{ changeTimeTo12(cuClass.start) }}
@@ -134,7 +136,7 @@
     v-for="cuInsClass in instructorClasses"
     :key="cuInsClass.courseNumber"
     class="course-block"
-    @click="router.push(`/studentList/${cuInsClass.semester +'-'+ cuInsClass.courseNumber +'-'+ cuInsClass.courseSection +'-'+cuInsClass.labSection}`)"
+    @click="router.push(`/cafeweb/mobile/studentList/${cuInsClass.semester +'-'+ cuInsClass.courseNumber +'-'+ cuInsClass.courseSection +'-'+cuInsClass.labSection}`)"
   >
   <ion-col size="11">
         <ion-text style="margin: 5px 0px;">          
@@ -264,7 +266,7 @@ export default {
         console.log("current time is "+ time.toString());
       this.currentTime = time;
     },
-
+/*
     getClass() {
       this.classes =[];  
       this.userRole ='';
@@ -287,7 +289,7 @@ export default {
       //this.$store.commit("addUserID", this.userID?this.userID:"123");
       
     },
-
+*/
     updateTime(){
       setInterval(() => {
         this.getCurrentTime();
@@ -311,7 +313,7 @@ export default {
         headers: { 'Content-Type': 'application/json', 
                   'Authorization': 'Bearer '+ token}
       };
-      fetch('https://qa2-web.scansoftware.com/cafeweb/api/authenticate/whoAmI', requestOptions)
+      fetch('/cafeweb/api/authenticate/whoAmI', requestOptions)
         .then(async response => {
           const data = await response.json();
 
@@ -344,8 +346,9 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error;
-          console.error('There was an error!', error);
-          this.$router.push('/login');
+          console.log('There was an error! '+error.toString());
+          //this.$router.push({name:'login'});
+          this.$router.push('/cafeweb/mobile/login');
         });
     },
 
@@ -358,7 +361,7 @@ export default {
         headers: { 'Content-Type': 'application/json', 
                   'Authorization': 'Bearer '+ this.$store.getters.getToken}
       };
-      fetch('https://qa2-web.scansoftware.com/cafeweb/api/student/schedule?dateFilter=D', requestOptions)
+      fetch('/cafeweb/api/student/schedule?dateFilter=D', requestOptions)
       //fetch('https://qa2-web.scansoftware.com/cafeweb/api/student/schedule', requestOptions)
         .then(async response => {
           const data = await response.json();
@@ -387,7 +390,7 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error;
-          console.error('There was an error!', error);
+          console.log('There was an error! '+error.toString());
           //this.$router.push('/login');
           this.stillLoading = false;
         });
@@ -403,7 +406,7 @@ export default {
         headers: { 'Content-Type': 'application/json', 
                   'Authorization': 'Bearer '+ this.$store.getters.getToken}
       };
-      fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/classes?date='+this.getTodayDay(), requestOptions)
+      fetch('/cafeweb/api/instructor/classes?date='+this.getTodayDay(), requestOptions)
         .then(async response => {
           const data = await response.json();
 
@@ -425,7 +428,7 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error;
-          console.error('There was an error!', error);
+          console.log('There was an error! '+error.toString());
           //this.$router.push('/login');
           this.stillLoading = false;
         });

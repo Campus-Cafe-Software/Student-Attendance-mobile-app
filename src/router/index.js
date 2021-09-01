@@ -1,39 +1,40 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 
 import ClassListPage from '../pages/ClassListPage.vue';
+//const base = '/cafeweb/mobile/';
 
 const routes = [{
-        path: '/',
-        redirect: '/classList'
+        path: '/cafeweb/mobile/',
+        redirect: '/cafeweb/mobile/classList'
     },
     {
-        path: '/classList',
+        path: '/cafeweb/mobile/classList',
         component: ClassListPage,
         name: 'classList'
     },
     {
-        path: '/submitTime/:id',
+        path: '/cafeweb/mobile/submitTime/:id',
         component: () =>
             import ('../pages/SubmitTimePage.vue'),
         props: true,
         name: 'submitTime'
     },
     {
-        path: '/studentList/:id',
+        path: '/cafeweb/mobile/studentList/:id',
         component: () =>
             import ('../pages/StudentListPage.vue'),
         props: true,
         name: 'studentList'
     },
     {
-        path: '/login',
+        path: '/cafeweb/mobile/login',
         component: () =>
             import ('../pages/loginPage.vue'),
         props: true,
         name: 'login'
     },
     {
-        path: '/editTimes/:cid/:sid',
+        path: '/cafeweb/mobile/editTimes/:cid/:sid',
         component: () =>
             import ('../pages/EditTimes.vue'),
         props: true,
@@ -42,7 +43,9 @@ const routes = [{
 ]
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    base: '/cafeweb/mobile/',
+    //history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory('/cafeweb/mobile/'),
     routes
 })
 
