@@ -96,6 +96,7 @@ export default {
     createStorage() {
         //var currStorage = window.localStorage;
         localStorage.setItem('token', this.$store.getters.getToken)
+        console.log("token saved to localstorage");
     },
     // get list of schools
     // build select dropdown
@@ -115,7 +116,7 @@ export default {
         //body: JSON.stringify({"username":"student3","password":"student3"})
 
       };
-      fetch('https://qa2-web.scansoftware.com/cafeweb/api/authenticate/token', requestOptions)
+      fetch('/cafeweb/mobileApi/authenticate/token', requestOptions)
         .then(async response => {
           const data = await response.json();
 
@@ -139,6 +140,12 @@ export default {
           this.errorMessage = error;
           console.error('There was an error!', error);
           this.loginError = true;
+
+          // push to next page no matter what
+          this.$router.push('/classList');
+
+          // goto new login page
+          //window.location.href = "/cafeweb/mobile/";
         });
     },
 
@@ -151,8 +158,8 @@ export default {
         headers: { 'Content-Type': 'application/json', 
                   'Authorization': 'Bearer '+myToken}
       };
-      fetch('https://qa2-web.scansoftware.com/cafeweb/api/student/classes', requestOptions)
-      //fetch('https://qa2-web.scansoftware.com/cafeweb/api/authenticate/whoAmI', requestOptions)
+      fetch('/cafeweb/mobileApi/student/classes', requestOptions)
+      //fetch('/cafeweb/mobileApi/authenticate/whoAmI', requestOptions)
         .then(async response => {
           const data = await response.json();
 

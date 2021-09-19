@@ -470,7 +470,7 @@ export default {
 
         // Add new instructor clock hours record for a student in instructor’s class.
         submitNewTime(index){
-            // post /cafeweb/api/instructor/studentClockTime
+            // post /cafeweb/mobileApi/instructor/studentClockTime
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -478,7 +478,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentClockTime?'+
+            fetch('/cafeweb/mobileApi/instructor/studentClockTime?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -513,7 +513,7 @@ export default {
 
         // Update instructor clock hours for an existing clock hour record
         submitUpdateTime(index){
-            // put  /cafeweb/api/instructor/studentClockTime
+            // put  /cafeweb/mobileApi/instructor/studentClockTime
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -521,7 +521,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentClockTime?'+
+            fetch('/cafeweb/mobileApi/instructor/studentClockTime?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -559,7 +559,7 @@ export default {
         // No student time
         // has inst time only
         submitDelTime(index){
-            //  DELETE  /cafeweb/api/instructor/studentClockTime
+            //  DELETE  /cafeweb/mobileApi/instructor/studentClockTime
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -567,7 +567,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentClockTime?'+
+            fetch('/cafeweb/mobileApi/instructor/studentClockTime?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -602,7 +602,7 @@ export default {
         // Absent flag is stored in clock hour record with no instructor or student clock in/out hours.
         // add absent flag to "Y"
         submitAddAbsent(){
-            // POST  /cafeweb/api/instructor/studentAbsent
+            // POST  /cafeweb/mobileApi/instructor/studentAbsent
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -610,7 +610,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/mobileApi/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -645,7 +645,7 @@ export default {
         // Absent flag is stored in clock hour record with no instructor or student clock in/out hours.
         // remove absent flag to "N"
         submitDelAbsent() {
-            // DELETE  /cafeweb/api/instructor/studentAbsent
+            // DELETE  /cafeweb/mobileApi/instructor/studentAbsent
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -653,7 +653,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/mobileApi/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +

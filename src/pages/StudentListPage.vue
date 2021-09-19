@@ -223,7 +223,7 @@ export default {
                          }
             };
 
-            var url = "https://qa2-web.scansoftware.com/cafeweb/api/instructor/classClockTimes?"+ 
+            var url = "/cafeweb/mobileApi/instructor/classClockTimes?"+ 
                         "date=" + this.getTodayDay() +
                         "&semester=" + this.cuInsClass.semester +                
                         "&courseNumber=" + this.cuInsClass.courseNumber + 
@@ -261,7 +261,7 @@ export default {
         },
 
         onSubmit(){
-            // post /cafeweb/api/instructor/studentClockTime
+            // post /cafeweb/mobileApi/instructor/studentClockTime
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -269,7 +269,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/confirmClassClockTimes?'+            
+            fetch('/cafeweb/mobileApi/instructor/confirmClassClockTimes?'+            
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -419,7 +419,7 @@ export default {
             },
 
         submitAddAbsent(id){
-            // POST  /cafeweb/api/instructor/studentAbsent
+            // POST  /cafeweb/mobileApi/instructor/studentAbsent
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -427,7 +427,7 @@ export default {
                 headers: { 'Content-Type': 'application/json', 
                            'Authorization': 'Bearer '+ this.$store.getters.getToken}
             };
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/mobileApi/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +
@@ -462,7 +462,7 @@ export default {
         // Absent flag is stored in clock hour record with no instructor or student clock in/out hours.
         // remove absent flag to "N"
         submitDelAbsent(id) {
-            // DELETE  /cafeweb/api/instructor/studentAbsent
+            // DELETE  /cafeweb/mobileApi/instructor/studentAbsent
             var myToken = this.$store.getters.getToken;
             console.log("token is "+myToken);
             const requestOptions = {
@@ -475,7 +475,7 @@ export default {
             var clockId = this.studentList.find((s)=>s.studentId == id).clockHistory.find((s)=>s.isAbsent == "Y").clockId;
             //var clockId = listClockhistory.find((s)=>s.isAbsent == "Y").clockId;
 
-            fetch('https://qa2-web.scansoftware.com/cafeweb/api/instructor/studentAbsent?'+
+            fetch('/cafeweb/mobileApi/instructor/studentAbsent?'+
                 "semester=" + this.cuInsClass.semester + 
                 "&courseNumber=" + this.cuInsClass.courseNumber +
                 "&courseSection=" + this.cuInsClass.courseSection +

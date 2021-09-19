@@ -93,7 +93,28 @@ export default {
 
       //this.$store.commit("addSchool",this.school);
       console.log("delete token -"+this.$store.getters.getToken+"-.");
-      this.router.push('/login')
+      //this.router.push('/login')
+      var myToken = localStorage.getItem("token");
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 
+                  'Authorization': 'Bearer '+myToken}
+      };
+      fetch('/cafeweb/mobileApi/authenticate/logout', requestOptions)
+        .then(async response => {
+          const data = await response.json();
+          console.log(data);
+          localStorage.removeItem("token");
+          window.location.href = "/cafeweb/mobile/";
+        })
+        .catch((error) => {
+          this.errorMessage = error;
+          console.error("There was an error!", error);
+          // goto new login page
+          localStorage.removeItem("token");
+          window.location.href = "/cafeweb/mobile/";
+        });
     }
   },
 };

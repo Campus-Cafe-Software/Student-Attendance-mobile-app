@@ -225,7 +225,7 @@ export default {
                   }
       };
 
-      var url = "https://qa2-web.scansoftware.com/cafeweb/api/student/"+ 
+      var url = "/cafeweb/mobileApi/student/"+ 
                 this.submitClockId +
                 "semester=" + this.$store.getters.cuClass(this.$route.params.id).semester +                
                 "&courseNumber=" + this.$route.params.id + 
