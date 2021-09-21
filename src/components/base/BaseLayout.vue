@@ -99,7 +99,7 @@ export default {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 
-                  'Authorization': 'Bearer '+myToken}
+                  'Authorization': 'Bearer '+myToken}
       };
       fetch('/cafeweb/mobileApi/authenticate/logout', requestOptions)
         .then(async response => {
