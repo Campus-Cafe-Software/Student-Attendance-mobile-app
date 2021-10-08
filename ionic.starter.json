@@ -6,6 +6,10 @@
     "package-lock.json",
     "www"
   ],
+  "build": {
+    "assetsPublicPath": "/cafeweb/mobile/",
+    "assetsSubDirectory": "static"
+  },
   "scripts": {
     "test": "npm run build"
   }

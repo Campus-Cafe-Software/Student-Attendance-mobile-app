@@ -147,10 +147,10 @@
       </ion-col></ion-row>
 </ion-grid> 
     <ion-row>
-        <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorCount>0">{{errorCount}} server error(s) Found on submit.</h2>
+        <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorCount>0">{{errorCount}} server error(s) found on submit.</h2>
     </ion-row>
     <ion-row>
-        <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorAbsent==true">Error Found on Mark Absent.</h2>
+        <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorAbsent==true">Error found on Mark Absent.</h2>
     </ion-row>
     </base-layout>
 </template>
@@ -307,7 +307,8 @@ export default {
                 "instructorClockOutDateTime":newTime,
                 "isAbsent":"",
                 "modify": 1,
-                "canDel": true
+                "canDel": true,
+                "isNew": true
             };
             this.student.clockHistory.push(clockHistory);
             console.log("current student with added time = "+JSON.stringify(this.student));
@@ -319,10 +320,11 @@ export default {
             //var clockHistory = {};
             let newTime =  new Date().toLocaleDateString('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', hour:'2-digit', minute:'2-digit' }).replace(', ','T').replace(' h ',':');
             
-            // remove instructor clock, set flag 3 for delete
+            // update instructor entered time,
+            // if this is a new added time, keep modify key to 1
             this.student.clockHistory[index].instructorClockInDateTime = newTime;
             this.student.clockHistory[index].instructorClockOutDateTime = newTime;
-            this.student.clockHistory[index].modify = 2;
+            if(this.student.clockHistory[index].modify != 1) this.student.clockHistory[index].modify =2 ;
             
             console.log("current student = "+JSON.stringify(this.student));
             this.anythingChanged = true;
@@ -352,6 +354,9 @@ export default {
             this.paddingstudentOrig();
 
             for(var i = 0; i < this.student.clockHistory.length; i++){
+                // if this is a new time, and time is modify or not, set modify to 1, call submitNewTime
+                if(this.student.clockHistory[i].isNew) { this.student.clockHistory[i].modify=1; }
+
                 switch(this.student.clockHistory[i].modify ){
                     case 0: console.log(i+" do nothing."); break;
                     case 1: console.log(i+" instructorClock is new");
@@ -785,7 +790,8 @@ export default {
                         "instructorClockInDateTime": "",
                         "instructorClockOutDateTime": "",
                         "isAbsent": "",
-                        "modify": 0
+                        "modify": 0,
+                        "isNew": false
                     })
                 }
             }

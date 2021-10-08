@@ -3,5 +3,9 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "vue"
+  "type": "vue",
+  "build": {
+    "assetsPublicPath": "/cafeweb/mobile/",
+    "assetsSubDirectory": "static"
+  }
 }
