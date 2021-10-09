@@ -7,8 +7,9 @@
       <ion-row>
         <ion-col size="12" style="text-align: center">
           <!--<h4>Faculty Acceptance</h4>-->
-          <div><ion-img src="../../assets/default-avatar.png" style="width:100px;margin: auto;margin-bottom:10px;"></ion-img></div>
+          <div><ion-img :src="student.imageURI" style="width:100px;margin: auto;margin-bottom:10px;"></ion-img></div>
           <h2 style="margin:0px;font-weight:bold;">{{student.firstName}} {{student.lastName}}</h2>
+          <h3>(ID: {{student.studentId}})</h3>
         </ion-col>
       </ion-row>
     </ion-grid>

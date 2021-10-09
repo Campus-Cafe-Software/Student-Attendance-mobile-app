@@ -28,10 +28,10 @@
             <ion-grid v-if="student.enrollmentStatus == 'graded'" style="opacity: 0.5;">
             <ion-row ion-no-padding >
                 <ion-col size="2"><div><ion-img
-            src="../../assets/default-avatar.png"            
+            :src="student.imageURI"            
           ></ion-img></div></ion-col>
                 <ion-col size="10">
-                    <div><span style="color:grey">{{student.firstName}} {{student.lastName}} </span></div>
+                    <div><span style="color:grey">{{student.firstName}} {{student.lastName}} ({{student.studentId}})</span></div>
                     <div v-if="student.isAbsent != 'Y'">
                     <ion-row style="align-content: flex-start;"                     
                      v-for="time in student.clockHistory" :key="time.studentID"
@@ -62,12 +62,12 @@
         <ion-grid v-if="student.enrollmentStatus == undefined || student.enrollmentStatus == null ">
             <ion-row ion-no-padding >
                 <ion-col size="2"><div><ion-img
-            src="../../assets/default-avatar.png"            
+            :src="student.imageURI"             
           ></ion-img></div></ion-col>
                 <ion-col size="8" @click="router.push(`/editTimes/${classIDLong}/${student.studentId}`)">
-                    <div><span style="font-weight:bold;" >{{student.firstName}} {{student.lastName}} </span></div>
+                    <div><span style="font-weight:bold;" >{{student.firstName}} {{student.lastName}} ({{student.studentId}})</span></div>
                     <div v-if="student.isAbsent != 'Y'">
-                    <ion-row style="align-content: flex-start;"                     
+                    <ion-row style="align-content: flex-start;"
                      v-for="time in student.clockHistory" :key="time.studentID"
                     >
                             <ion-col size="5" v-if="student.clockHistory.length > 0">
@@ -400,6 +400,11 @@ export default {
                             cuClass.students[i].clockHistory.push(newClockHistory);
                             cuClass.students[i].isAbsent = "";
                         }                   
+
+                        // update student image path
+                        if(cuClass.students[i].imageURI != undefined || cuClass.students[i].imageURI != null ) {
+                            cuClass.students[i].imageURI = "https://clk-web.scansoftware.com/cafeweb/" + cuClass.students[i].imageURI; 
+                        }
                     }
                 } else { console.log('no students found'); }
                 console.log("student list after cleanup" + JSON.stringify(cuClass.students));

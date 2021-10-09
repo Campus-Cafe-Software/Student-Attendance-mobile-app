@@ -9,6 +9,7 @@
             v-if="stillLoading == true"
           ></ion-spinner>
           <h2 style="font-weight: bold">{{ userName }}</h2>
+          <h3 style="font-size:14px">ID: {{ userID }}</h3>
           <h2 style="margin: 0px; margin-top: 10px">Today</h2>
           <h2 style="margin: 0px; margin-top: 0px; font-weight: bold">
             {{ currentTime }}
@@ -512,6 +513,7 @@ export default {
           //this.userName = data.firstName + " " + data.lastName;
           this.firstName = data.firstName;
           this.lastName = data.lastName;
+          this.userID = data.userId;
           this.isStudent = data.isStudent;
           this.isInstructor = data.isInstructor;
           this.$store.commit(
