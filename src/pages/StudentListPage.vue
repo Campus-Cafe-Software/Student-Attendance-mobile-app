@@ -31,7 +31,7 @@
             :src="student.imageURI"            
           ></ion-img></div></ion-col>
                 <ion-col size="10">
-                    <div><span style="color:grey">{{student.firstName}} {{student.lastName}} ({{student.studentId}})</span></div>
+                    <div><span style="color:grey">{{student.firstName}} {{student.lastName}} (ID: {{student.studentId}})</span></div>
                     <div v-if="student.isAbsent != 'Y'">
                     <ion-row style="align-content: flex-start;"                     
                      v-for="time in student.clockHistory" :key="time.studentID"
@@ -65,7 +65,7 @@
             :src="student.imageURI"             
           ></ion-img></div></ion-col>
                 <ion-col size="8" @click="router.push(`/editTimes/${classIDLong}/${student.studentId}`)">
-                    <div><span style="font-weight:bold;" >{{student.firstName}} {{student.lastName}} ({{student.studentId}})</span></div>
+                    <div><span style="font-weight:bold;" >{{student.firstName}} {{student.lastName}} (ID: {{student.studentId}})</span></div>
                     <div v-if="student.isAbsent != 'Y'">
                     <ion-row style="align-content: flex-start;"
                      v-for="time in student.clockHistory" :key="time.studentID"
@@ -402,8 +402,8 @@ export default {
                         }                   
 
                         // update student image path
-                        if(cuClass.students[i].imageURI != undefined || cuClass.students[i].imageURI != null ) {
-                            cuClass.students[i].imageURI = "https://clk-web.scansoftware.com/cafeweb/" + cuClass.students[i].imageURI; 
+                        if(cuClass.students[i].imageURI == undefined || cuClass.students[i].imageURI == null ) {
+                            cuClass.students[i].imageURI = "../../assets/default-avatar.png"; 
                         }
                     }
                 } else { console.log('no students found'); }
