@@ -148,7 +148,7 @@
       </ion-col></ion-row>
 </ion-grid> 
     <ion-row>
-        <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorCount>0">{{errorCount}} server error(s) found on submit.</h2>
+        <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorCount>0">{{errorCount}} server errors found on submit. {{error250}}</h2>
     </ion-row>
     <ion-row>
         <h2 style="color:red;padding:0 30px;text-align:center;" v-if="errorAbsent==true">Error found on Mark Absent.</h2>
@@ -193,6 +193,7 @@ export default {
             labSection: '',
             studentId: '',
             errorCount: 0,
+            error250: '',
             errorAbsent: false,
             checkIsAbsent: false,
             anythingChanged: false,
@@ -505,6 +506,14 @@ export default {
                     this.openToastFailed();
                     return Promise.reject(response.status);                    
                 }
+                // error code 250 mean checkin tine is late than checkout time
+                else if (response.status == 250){
+                    this.errorCount++;
+                    this.openToastFailed();
+                    this.error250 = "There is a time input error, either the check in time is later than checkout time, or the same time is already entered. Go back to the previous page reload, then try again.";
+                    return Promise.reject(response.status); 
+                }
+
                 //console.log("ins classes = " + JSON.stringify(data.classes));
                 console.log("added new time "+index);
                 this.openToastSuccessful();
@@ -548,6 +557,13 @@ export default {
                     this.errorCount++;
                     this.openToastFailed();
                     return Promise.reject(response.status);
+                }
+                // error code 250 mean checkin tine is late than checkout time
+                else if (response.status == 250){
+                    this.errorCount++;
+                    this.error250 = "There is a time input error, either the check in time is later than checkout time, or the same time is already entered. Go back to the previous page reload, then try again.";
+                    this.openToastFailed();
+                    return Promise.reject(response.status); 
                 }
                 //console.log("ins classes = " + JSON.stringify(data.classes));
                     console.log("updated old time"+index);
