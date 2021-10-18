@@ -8,6 +8,6 @@ module.exports = {
         config.plugins.delete('prefetch')
     },
 
-    //publicPath: process.env.NODE_ENV === 'production' ? '/cafeweb/mobile/' : '/cafeweb/mobile/'
+    publicPath: process.env.NODE_ENV === 'production' ? '/cafeweb/mobile/' : '/cafeweb/mobile/'
 
   }

@@ -249,6 +249,8 @@ export default {
             console.log("current student = "+JSON.stringify(this.student));
             this.cuInsClass = this.$store.getters.cuInsClass(this.$route.params.cid);
 
+            let stateObj = { id: "100" };
+            window.history.replaceState(stateObj, "Attendance", "/cafeweb/mobile/");
             
             this.toCheckIsAbsent();
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<HEAD>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+<title>Attendance</title>
+</HEAD>
+<body onload="loadDoc()"> 
+
+<div id="demo"></div>
+
+<script>
+
+function myLogon() {
+  console.log("redirect to login page");
+  location.assign("/cafeweb/login?rtl=timeclock");
+}
+
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+	var token = localStorage.getItem('token');
+	console.log("token="+token);
+	if (this.readyState == 4 && this.status == 200  && token != null) {
+      console.log("status = " + this.status);
+	  location.assign("/index.html");
+	  //document.getElementById("demo").innerHTML =this.responseText;
+    }else { //if (this.readyState == 4 && this.status == 401) {
+	  console.log("status = " + this.status);
+      myLogon();
+    }
+  };
+  //xhttp.open("GET", "https://qa1-web.scansoftware.com/cafeweb/mobileApi/authenticate/whoAmI");
+  xhttp.open("GET", "/index.html");
+  xhttp.send();
+}
+
+//  https://qa2-web.scansoftware.com/index.html
+//  https://qa2-web.scansoftware.com/
+//  https://qa2-web.scansoftware.com/cafeweb/mobile/
+//  https://qa2-web.scansoftware.com/cafeweb/api/authenticate/whoAmI
+
+</script>
+
+</body>
+</html>

@@ -106,6 +106,10 @@ export default {
         ampm;
       console.log("current time is "+ time.toString());
       this.currentTime = time;
+
+      let stateObj = { id: "100" };
+      window.history.replaceState(stateObj, "Attendance", "/cafeweb/mobile/");
+
     },
       // change to 12hr AMPM
             changeTimeTo12(time) {

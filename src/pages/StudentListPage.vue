@@ -258,6 +258,9 @@ export default {
                 this.openToastFailed();
                 this.stillLoading = false;
                 }); 
+
+                let stateObj = { id: "100" };
+                window.history.replaceState(stateObj, "Attendance", "/cafeweb/mobile/");
         },
 
         onSubmit(){

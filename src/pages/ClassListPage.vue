@@ -531,7 +531,7 @@ export default {
           }
 
           let stateObj = { id: "100" };
-          window.history.replaceState(stateObj, "Attendance", "/");
+          window.history.replaceState(stateObj, "Attendance", "/cafeweb/mobile/");
           //this.postId = data.id;
         })
         .catch((error) => {

@@ -106,14 +106,14 @@ export default {
           const data = await response.json();
           console.log(data);
           localStorage.removeItem("token");
-          window.location.href = "/cafeweb/mobile/";
+          window.location.href = "/cafeweb/mobile/login.html";
         })
         .catch((error) => {
           this.errorMessage = error;
           console.error("There was an error!", error);
           // goto new login page
           localStorage.removeItem("token");
-          window.location.href = "/cafeweb/mobile/";
+          window.location.href = "/cafeweb/mobile/login.html";
         });
     }
   },
